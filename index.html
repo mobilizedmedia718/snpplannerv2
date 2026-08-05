@@ -4,299 +4,66 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#17324d">
-<link rel="manifest" href="manifest.json">
-<title>Sip & Paint Business Planner</title>
+<title>Sip & Paint Business Planner V2</title>
 <style>
-:root{--navy:#17324d;--blue:#2f75b5;--gold:#e6b94a;--cream:#fff8df;--green:#2f855a;--red:#b91c1c;--bg:#f3f5f7;--border:#d7dee7}
-*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:#1f2937}
-header{background:var(--navy);color:#fff;padding:16px;position:sticky;top:0;z-index:5}
-header h1{margin:0;font-size:1.25rem}.sub{opacity:.82;font-size:.86rem;margin-top:4px}
-nav{display:flex;gap:8px;overflow:auto;padding:10px;background:#fff;border-bottom:1px solid #ddd;position:sticky;top:70px;z-index:4}
-nav button,.btn{border:0;border-radius:8px;padding:10px 13px;cursor:pointer;background:#e5e7eb;font-weight:600}
-nav button.active,.btn.primary{background:var(--blue);color:#fff}.btn.good{background:var(--green);color:#fff}.btn.warn{background:var(--gold)}.btn.danger{background:var(--red);color:#fff}
-.btn.small{padding:7px 9px;font-size:.78rem}
-main{max-width:1250px;margin:auto;padding:14px}.tab{display:none}.tab.active{display:block}
-.card{background:#fff;border-radius:12px;padding:15px;margin-bottom:14px;box-shadow:0 2px 8px #00000012}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:11px}
-label{font-size:.8rem;font-weight:bold;display:block;margin-bottom:5px}
-input,select,textarea{width:100%;padding:9px;border:1px solid #cbd5e1;border-radius:7px;background:var(--cream);font:inherit}
-table{width:100%;border-collapse:collapse;min-width:900px}th{background:var(--blue);color:#fff}
-th,td{padding:7px;border:1px solid var(--border);text-align:left;vertical-align:top}td input,td select{min-width:80px}
-.scroll{overflow:auto}.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:11px}
-.kpi{background:#fff;border-left:6px solid var(--gold);border-radius:10px;padding:13px}.kpi b{font-size:1.22rem;display:block;margin-top:6px}
-.actions{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.muted{font-size:.84rem;color:#64748b}.status{padding:10px;border-radius:8px;background:#eef4f8;margin-top:10px}
-.package{border:1px solid var(--border);border-radius:12px;margin:14px 0;overflow:hidden}
-.package-head{background:#eef4f8;padding:12px;display:grid;grid-template-columns:2fr repeat(6,1fr) auto;gap:8px;align-items:end}
-.package-body{padding:12px}.package-summary{display:flex;gap:18px;flex-wrap:wrap;padding:10px 12px;background:#fafafa;border-top:1px solid var(--border)}
-.item-table{min-width:760px}.item-table th{background:#64748b}
-.positive{color:#166534;font-weight:bold}.negative{color:#b91c1c;font-weight:bold}.wide{grid-column:auto}
-.badge{display:inline-block;padding:3px 7px;border-radius:999px;background:#dbeafe;font-size:.76rem}
-@media(max-width:900px){.package-head{grid-template-columns:1fr 1fr}.package-head .wide{grid-column:1/-1}}
-@media print{nav,.actions,.btn{display:none!important}header{position:static}.tab{display:block!important}.card{box-shadow:none}}
+:root{--navy:#17324d;--blue:#2f75b5;--gold:#e6b94a;--cream:#fff8df;--green:#2f855a;--red:#b91c1c;--bg:#f3f5f7;--border:#d7dee7;--muted:#64748b}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:#1f2937}header{background:var(--navy);color:#fff;padding:16px;position:sticky;top:0;z-index:5}header h1{margin:0;font-size:1.3rem}.sub{opacity:.82;font-size:.86rem;margin-top:4px}nav{display:flex;gap:8px;overflow:auto;padding:10px;background:#fff;border-bottom:1px solid #ddd;position:sticky;top:72px;z-index:4}nav button,.btn{border:0;border-radius:8px;padding:10px 13px;cursor:pointer;background:#e5e7eb;font-weight:600}nav button.active,.btn.primary{background:var(--blue);color:#fff}.btn.good{background:var(--green);color:#fff}.btn.warn{background:var(--gold)}.btn.danger{background:var(--red);color:#fff}.btn.small{padding:7px 9px;font-size:.78rem}main{max-width:1400px;margin:auto;padding:14px}.tab{display:none}.tab.active{display:block}.card{background:#fff;border-radius:12px;padding:15px;margin-bottom:14px;box-shadow:0 2px 8px #00000012}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:11px}.wide{grid-column:1/-1}label{font-size:.8rem;font-weight:bold;display:block;margin-bottom:5px}input,select,textarea{width:100%;padding:9px;border:1px solid #cbd5e1;border-radius:7px;background:var(--cream);font:inherit}textarea{min-height:90px}table{width:100%;border-collapse:collapse;min-width:1050px}th{background:var(--blue);color:#fff}th,td{padding:7px;border:1px solid var(--border);text-align:left;vertical-align:top}td input,td select{min-width:85px}.scroll{overflow:auto}.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:11px}.kpi{background:#fff;border-left:6px solid var(--gold);border-radius:10px;padding:13px}.kpi b{font-size:1.22rem;display:block;margin-top:6px}.actions{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.muted{font-size:.84rem;color:var(--muted)}.status{padding:10px;border-radius:8px;background:#eef4f8;margin-top:10px}.package,.vendor-card,.addon-card{border:1px solid var(--border);border-radius:12px;margin:14px 0;overflow:hidden}.package-head,.vendor-head,.addon-head{background:#eef4f8;padding:12px;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;align-items:end}.package-body,.vendor-body,.addon-body{padding:12px}.summary{display:flex;gap:18px;flex-wrap:wrap;padding:10px 12px;background:#fafafa;border-top:1px solid var(--border)}.positive{color:#166534;font-weight:bold}.negative{color:#b91c1c;font-weight:bold}.badge{display:inline-block;padding:3px 7px;border-radius:999px;background:#dbeafe;font-size:.76rem}.logo-preview{display:block;max-width:240px;max-height:170px;object-fit:contain;border:1px solid #ddd;border-radius:8px;padding:8px;background:#fff;margin-top:10px}.section-title{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.notice{background:#fffbeb;border-left:5px solid var(--gold);padding:10px;border-radius:8px;margin-bottom:12px}@media(max-width:700px){header{position:static}nav{top:0}.kpi b{font-size:1.05rem}}@media print{nav,.actions,.btn{display:none!important}header{position:static}.tab{display:block!important}.card{box-shadow:none}}
 </style>
 </head>
 <body>
-<header><h1>Sip & Paint Business Planner</h1><div class="sub">Tickets, Eventbrite sales, package items, inventory, expenses and profit</div></header>
+<header><h1>Sip & Paint Business Planner V2</h1><div class="sub">Tickets, add-ons, vendors, Eventbrite, inventory, total costs, cost per customer and profit</div></header>
 <nav id="nav"></nav>
 <main>
-<section id="business" class="tab">
-  <div class="card">
-    <h2>Business Profile</h2>
-    <p class="muted">Business information is saved automatically on this device.</p>
-    <div class="grid" id="businessInputs"></div>
-  </div>
-</section>
-
-<section id="dashboard" class="tab active">
-  <div class="kpis" id="kpis"></div>
-  <div class="card"><h2>Event Information</h2><div class="grid" id="eventInputs"></div></div>
-  <div class="actions">
-    <button class="btn good" onclick="saveState()">Save</button>
-    <button class="btn" onclick="exportData()">Export Backup</button>
-    <label class="btn">Import Backup<input hidden type="file" accept=".json" onchange="importData(event)"></label>
-    <button class="btn warn" onclick="window.print()">Print / Save PDF</button>
-  </div>
-</section>
-
-<section id="tickets" class="tab">
-  <div class="card">
-    <h2>Ticket Package Builder</h2>
-    <p class="muted">Add or delete package items. Item cost × quantity per ticket automatically changes the package cost and profit.</p>
-    <div class="actions"><button class="btn primary" onclick="addPackage()">Add Ticket Package</button></div>
-    <div id="packages"></div>
-  </div>
-</section>
-
-<section id="eventbrite" class="tab">
-  <div class="card">
-    <h2>Eventbrite Connection</h2>
-    <div class="grid">
-      <div><label>Eventbrite Event ID</label><input id="ebEventId" inputmode="numeric"></div>
-      <div><label>Secure Connector URL</label><input id="ebConnectorUrl" type="url"></div>
-    </div>
-    <div class="actions">
-      <button class="btn primary" onclick="syncEventbrite()">Sync Eventbrite Sales</button>
-      <button class="btn" onclick="loadTicketClasses()">Import Eventbrite Ticket Types</button>
-    </div>
-    <div id="ebStatus" class="status">Not connected.</div>
-  </div>
-  <div class="card">
-    <h2>Synced Ticket Sales</h2>
-    <div class="scroll"><table id="eventbriteTable"></table></div>
-  </div>
-</section>
-
+<section id="dashboard" class="tab active"><div class="kpis" id="kpis"></div><div class="card"><h2>Event Information</h2><div class="grid" id="eventInputs"></div></div><div class="actions"><button class="btn good" onclick="saveState()">Save</button><button class="btn" onclick="exportData()">Export Backup</button><label class="btn">Import Backup<input hidden type="file" accept=".json" onchange="importData(event)"></label><button class="btn warn" onclick="window.print()">Print / Save PDF</button></div></section>
+<section id="business" class="tab"><div class="card"><h2>Business Profile</h2><p class="muted">Profile information saves automatically on this device.</p><div class="grid" id="businessInputs"></div></div></section>
+<section id="tickets" class="tab"><div class="card"><div class="section-title"><div><h2>Ticket Packages</h2><p class="muted">Ticket revenue and included-item costs feed the financial dashboard automatically.</p></div><button class="btn primary" onclick="addPackage()">Add Ticket Package</button></div><div id="packages"></div></div></section>
+<section id="addons" class="tab"><div class="card"><div class="section-title"><div><h2>Ticket Add-ons</h2><p class="muted">Connect an add-on to a vendor and choose flat, per-item, percentage, or hybrid compensation.</p></div><button class="btn primary" onclick="addAddon()">Add Add-on</button></div><div id="addonsList"></div></div></section>
+<section id="vendors" class="tab"><div class="card"><div class="section-title"><div><h2>Vendor Management</h2><p class="muted">Vendor agreements can be overridden on individual add-ons.</p></div><button class="btn primary" onclick="addVendor()">Add Vendor</button></div><div id="vendorsList"></div></div></section>
+<section id="eventbrite" class="tab"><div class="card"><h2>Eventbrite Connection</h2><div class="grid"><div><label>Eventbrite Event ID</label><input id="ebEventId" inputmode="numeric" placeholder="Enter Eventbrite event ID" onfocus="this.select()"></div><div><label>Secure Connector URL</label><input id="ebConnectorUrl" type="url" placeholder="Enter connector URL" onfocus="this.select()"></div></div><div class="actions"><button class="btn primary" onclick="syncEventbrite()">Sync Eventbrite Sales</button><button class="btn" onclick="loadTicketClasses()">Import Eventbrite Ticket Types</button></div><div id="ebStatus" class="status">Not connected.</div></div><div class="card"><h2>Synced Ticket Sales</h2><div class="scroll"><table id="eventbriteTable"></table></div></div></section>
 <section id="venue" class="tab"><div class="card"><h2>Venue & Fees</h2><div class="scroll"><table id="venueTable"></table></div></div></section>
-<section id="supplies" class="tab"><div class="card"><h2>Supplies & Vendors</h2><div class="scroll"><table id="supplyTable"></table></div></div></section>
-<section id="sales" class="tab"><div class="card"><h2>Merchandise, Food & Beverage</h2><div class="scroll"><table id="salesTable"></table></div></div></section>
+<section id="supplies" class="tab"><div class="card"><h2>Supplies</h2><div class="scroll"><table id="supplyTable"></table></div></div></section>
+<section id="sales" class="tab"><div class="card"><h2>Other Sales</h2><p class="muted">Use this for merchandise, food, beverages, or other sales not sold as ticket add-ons.</p><div class="scroll"><table id="salesTable"></table></div></div></section>
 <section id="inventory" class="tab"><div class="card"><h2>Inventory</h2><div class="scroll"><table id="inventoryTable"></table></div></div></section>
 </main>
-
 <script>
-const tabs=[["dashboard","Dashboard"],["business","Business Profile"],["tickets","Ticket Packages"],["eventbrite","Eventbrite"],["venue","Venue"],["supplies","Supplies"],["sales","Sales"],["inventory","Inventory"]];
-document.getElementById("nav").innerHTML=tabs.map((t,i)=>`<button class="${i?'':'active'}" onclick="showTab('${t[0]}',this)">${t[1]}</button>`).join("");
+const tabs=[["dashboard","Dashboard"],["business","Business Profile"],["tickets","Ticket Packages"],["addons","Add-ons"],["vendors","Vendors"],["eventbrite","Eventbrite"],["venue","Venue"],["supplies","Supplies"],["sales","Sales"],["inventory","Inventory"]];
+nav.innerHTML=tabs.map((t,i)=>`<button class="${i?'':'active'}" onclick="showTab('${t[0]}',this)">${t[1]}</button>`).join("");
 function showTab(id,b){document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));b.classList.add('active')}
-
 const blankItem=()=>({name:"",category:"",unitCost:"",qtyPerTicket:"",inventoryName:""});
-const blankPackage=()=>({name:"",eventbriteTicketClassId:"",price:"",manualSold:"",eventbriteSold:0,eventbriteRevenue:0,fees:0,items:[blankItem()]});
-const defaultState={
- business:{name:"",owner:"",logo:"",address:"",city:"",state:"",zip:"",phone:"",email:"",website:"",instagram:"",facebook:"",taxRate:"",taxId:"",notes:""},
- event:{name:"",date:"",location:"",expectedGuests:"",sponsor:"",otherIncome:""},
- eventbrite:{eventId:"1995025559152",connectorUrl:"",lastSync:"",orders:[],ticketClasses:[]},
- packages:[blankPackage()],
- venue:[{name:"",amount:"",refundable:false}],
- supplies:[{category:"",item:"",vendor:"",alternate:"",unitCost:"",qty:"",shipping:""}],
- sales:[{category:"",item:"",vendor:"",unitCost:"",sellPrice:"",purchased:"",sold:"",processingFees:"",otherFees:""}],
- inventory:[{name:"",starting:"",purchased:"",manualUsed:"",damaged:"",reorderLevel:""}]
-};
-let state;
-try{
- const saved=JSON.parse(localStorage.getItem("sipPaintPlannerV4"))||{};
- state={...defaultState,...saved,business:{...defaultState.business,...(saved.business||{})},event:{...defaultState.event,...(saved.event||{})},eventbrite:{...defaultState.eventbrite,...(saved.eventbrite||{})}};
-}catch(e){state=structuredClone(defaultState)}
-function n(v){return Number(v)||0}
-const money=v=>new Intl.NumberFormat("en-US",{style:"currency",currency:"USD"}).format(n(v));
-const esc=v=>String(v??"").replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
-function packageItemCost(p){return p.items.reduce((s,x)=>s+n(x.unitCost)*n(x.qtyPerTicket),0)}
-function packageSold(p){return n(p.manualSold)+n(p.eventbriteSold)}
-function packageRevenue(p){return n(p.price)*n(p.manualSold)+n(p.eventbriteRevenue)}
-function packageProfit(p){return packageRevenue(p)-packageItemCost(p)*packageSold(p)-n(p.fees)}
-function totalPackageRevenue(){return state.packages.reduce((s,p)=>s+packageRevenue(p),0)}
-function totalPackageCosts(){return state.packages.reduce((s,p)=>s+packageItemCost(p)*packageSold(p),0)}
-function totalPackageFees(){return state.packages.reduce((s,p)=>s+n(p.fees),0)}
-function saveState(silent=false){localStorage.setItem("sipPaintPlannerV4",JSON.stringify(state));if(!silent)alert("Saved on this device.")}
-function render(){
- renderBusiness();renderEvent();renderPackages();renderVenue();renderSupplies();renderSales();renderInventory();renderEventbrite();renderKpis();
- document.getElementById("ebEventId").value=state.eventbrite.eventId||"";
- document.getElementById("ebConnectorUrl").value=state.eventbrite.connectorUrl||"";
-}
-function handleLogoUpload(event){
- const file=event.target.files&&event.target.files[0];
- if(!file)return;
- if(!file.type.startsWith("image/")){alert("Please select an image file.");event.target.value="";return}
- if(file.size>1500000){alert("Please choose an image smaller than 1.5 MB.");event.target.value="";return}
- const reader=new FileReader();
- reader.onload=()=>{state.business.logo=reader.result;saveState(true);renderBusiness()};
- reader.onerror=()=>alert("The image could not be loaded.");
- reader.readAsDataURL(file);
-}
-function updateBusinessLogoUrl(value){state.business.logo=value;saveState(true);const preview=document.getElementById("businessLogoPreview");const area=document.getElementById("businessLogoPreviewArea");if(preview&&area){preview.src=value;area.style.display=value?"block":"none"}}
-function removeBusinessLogo(){state.business.logo="";saveState(true);renderBusiness()}
-function renderBusiness(){
- const fields=[
-  ["name","Business Name","text","Enter business name"],
-  ["owner","Owner Name","text","Enter owner name"],
-  ["address","Street Address","text","Enter street address"],
-  ["city","City","text","Enter city"],
-  ["state","State","text","Enter state"],
-  ["zip","ZIP Code","text","Enter ZIP code"],
-  ["phone","Phone","tel","Enter phone number"],
-  ["email","Email","email","Enter email address"],
-  ["website","Website","url","Enter website address"],
-  ["instagram","Instagram","text","Enter Instagram profile"],
-  ["facebook","Facebook","text","Enter Facebook profile"],
-  ["taxRate","Tax Rate (%)","number","Enter tax percentage"],
-  ["taxId","Tax ID","text","Enter optional tax ID"]
- ];
- const logo=state.business.logo||"";
- const logoUrl=logo.startsWith("data:")?"":logo;
- businessInputs.innerHTML=`<div class="wide"><label>Business Logo</label><input type="url" placeholder="Paste an image URL or upload a file below" value="${esc(logoUrl)}" onfocus="this.select()" oninput="updateBusinessLogoUrl(this.value)"><input type="file" accept="image/*" onchange="handleLogoUpload(event)"><div id="businessLogoPreviewArea" style="margin-top:12px;display:${logo?'block':'none'}"><img id="businessLogoPreview" src="${esc(logo)}" alt="Business logo preview" style="display:block;max-width:220px;max-height:160px;object-fit:contain;border:1px solid #ddd;border-radius:8px;padding:8px;background:#fff"><button type="button" class="btn danger" style="margin-top:8px" onclick="removeBusinessLogo()">Remove Logo</button></div></div>`+fields.map(([k,l,t,p])=>`<div><label>${l}</label><input type="${t}" placeholder="${p}" value="${esc(state.business[k])}" ${k==="taxRate"?'step="0.01"':""} onfocus="this.select()" oninput="state.business.${k}=this.value;saveState(true)"></div>`).join("")+`<div class="wide"><label>Business Notes</label><textarea placeholder="Enter business notes" onfocus="this.select()" oninput="state.business.notes=this.value;saveState(true)">${esc(state.business.notes)}</textarea></div>`;
-}
-function renderEvent(){
- const fields=[["name","Event Name","text"],["date","Event Date","date"],["location","Venue / Location","text"],["expectedGuests","Expected Guests","number"],["sponsor","Sponsorship Income","number"],["otherIncome","Other Income","number"]];
- eventInputs.innerHTML=fields.map(([k,l,t])=>`<div><label>${l}</label><input type="${t}" value="${esc(state.event[k])}" oninput="state.event.${k}=this.value;renderKpis()"></div>`).join("");
-}
-function addPackage(){state.packages.push(blankPackage());renderPackages();renderKpis();saveState(true)}
-function deletePackage(i){if(confirm("Delete this ticket package?")){state.packages.splice(i,1);render();saveState(true)}}
-function addPackageItem(i){state.packages[i].items.push(blankItem());renderPackages();saveState(true)}
-function deletePackageItem(i,j){state.packages[i].items.splice(j,1);if(!state.packages[i].items.length)state.packages[i].items.push(blankItem());render();saveState(true)}
-function renderPackages(){
- packages.innerHTML=state.packages.map((p,i)=>{
-   const unit=packageItemCost(p), sold=packageSold(p), rev=packageRevenue(p), profit=packageProfit(p);
-   return `<div class="package">
-   <div class="package-head">
-     <div class="wide"><label>Package / Tier Name</label><input value="${esc(p.name)}" oninput="state.packages[${i}].name=this.value"></div>
-     <div><label>Ticket Price</label><input type="number" min="0" step=".01" value="${esc(p.price)}" oninput="state.packages[${i}].price=this.value;renderPackages();renderKpis()"></div>
-     <div><label>Manual Tickets Sold</label><input type="number" min="0" value="${esc(p.manualSold)}" oninput="state.packages[${i}].manualSold=this.value;render();"></div>
-     <div><label>Eventbrite Sold</label><input value="${esc(p.eventbriteSold)}" disabled></div>
-     <div><label>Eventbrite Revenue</label><input value="${money(p.eventbriteRevenue)}" disabled></div>
-     <div><label>Eventbrite Fees</label><input type="number" min="0" step=".01" value="${esc(p.fees)}" oninput="state.packages[${i}].fees=this.value;renderPackages();renderKpis()"></div>
-     <div><label>Ticket Class ID</label><select onchange="state.packages[${i}].eventbriteTicketClassId=this.value;saveState(true)"><option value=""></option>${state.eventbrite.ticketClasses.map(tc=>`<option value="${esc(tc.id)}" ${String(p.eventbriteTicketClassId)===String(tc.id)?'selected':''}>${esc(tc.name)}</option>`).join("")}</select></div>
-     <button class="btn danger small" onclick="deletePackage(${i})">Delete Package</button>
-   </div>
-   <div class="package-body"><div class="scroll"><table class="item-table">
-   <tr><th>Included Item</th><th>Category</th><th>Unit Cost</th><th>Quantity Per Ticket</th><th>Inventory Item</th><th>Line Cost</th><th></th></tr>
-   ${p.items.map((x,j)=>`<tr>
-     <td><input value="${esc(x.name)}" oninput="state.packages[${i}].items[${j}].name=this.value"></td>
-     <td><input value="${esc(x.category)}" oninput="state.packages[${i}].items[${j}].category=this.value"></td>
-     <td><input type="number" min="0" step=".01" value="${esc(x.unitCost)}" oninput="state.packages[${i}].items[${j}].unitCost=this.value;renderPackages();renderKpis()"></td>
-     <td><input type="number" min="0" step=".01" value="${esc(x.qtyPerTicket)}" oninput="state.packages[${i}].items[${j}].qtyPerTicket=this.value;render();"></td>
-     <td><select onchange="state.packages[${i}].items[${j}].inventoryName=this.value;renderInventory();saveState(true)"><option value=""></option>${state.inventory.map(inv=>`<option value="${esc(inv.name)}" ${x.inventoryName===inv.name?'selected':''}>${esc(inv.name)}</option>`).join("")}</select></td>
-     <td>${money(n(x.unitCost)*n(x.qtyPerTicket))}</td>
-     <td><button class="btn danger small" onclick="deletePackageItem(${i},${j})">Delete</button></td>
-   </tr>`).join("")}
-   </table></div>
-   <div class="actions"><button class="btn" onclick="addPackageItem(${i})">Add Item to Ticket</button></div></div>
-   <div class="package-summary">
-      <span>Item cost per ticket: <b>${money(unit)}</b></span>
-      <span>Total sold: <b>${sold}</b></span>
-      <span>Revenue: <b>${money(rev)}</b></span>
-      <span>Package item cost: <b>${money(unit*sold)}</b></span>
-      <span>Profit: <b class="${profit>=0?'positive':'negative'}">${money(profit)}</b></span>
-   </div></div>`;
- }).join("");
-}
-function renderVenue(){
- venueTable.innerHTML=`<tr><th>Fee / Deposit</th><th>Amount</th><th>Refundable?</th><th>Operating Cost</th><th></th></tr>`+
- state.venue.map((r,i)=>`<tr><td><input value="${esc(r.name)}" oninput="state.venue[${i}].name=this.value"></td><td><input type="number" min="0" step=".01" value="${esc(r.amount)}" oninput="state.venue[${i}].amount=this.value;renderKpis()"></td><td><input type="checkbox" ${r.refundable?'checked':''} onchange="state.venue[${i}].refundable=this.checked;renderKpis()"></td><td>${money(r.refundable?0:r.amount)}</td><td><button class="btn danger small" onclick="state.venue.splice(${i},1);render();saveState(true)">Delete</button></td></tr>`).join("")+
- `<tr><td colspan="5"><button class="btn" onclick="state.venue.push({name:'',amount:'',refundable:false});renderVenue()">Add Row</button></td></tr>`;
-}
-function renderSupplies(){
- supplyTable.innerHTML=`<tr><th>Category</th><th>Item</th><th>Vendor</th><th>Alternate</th><th>Unit Cost</th><th>Qty</th><th>Shipping</th><th>Total</th><th></th></tr>`+
- state.supplies.map((r,i)=>`<tr>
- <td><input value="${esc(r.category)}" oninput="state.supplies[${i}].category=this.value"></td><td><input value="${esc(r.item)}" oninput="state.supplies[${i}].item=this.value"></td>
- <td><input value="${esc(r.vendor)}" oninput="state.supplies[${i}].vendor=this.value"></td><td><input value="${esc(r.alternate)}" oninput="state.supplies[${i}].alternate=this.value"></td>
- <td><input type="number" min="0" step=".01" value="${esc(r.unitCost)}" oninput="state.supplies[${i}].unitCost=this.value;renderKpis()"></td>
- <td><input type="number" min="0" step=".01" value="${esc(r.qty)}" oninput="state.supplies[${i}].qty=this.value;renderKpis()"></td>
- <td><input type="number" min="0" step=".01" value="${esc(r.shipping)}" oninput="state.supplies[${i}].shipping=this.value;renderKpis()"></td>
- <td>${money(n(r.unitCost)*n(r.qty)+n(r.shipping))}</td><td><button class="btn danger small" onclick="state.supplies.splice(${i},1);render();saveState(true)">Delete</button></td></tr>`).join("")+
- `<tr><td colspan="9"><button class="btn" onclick="state.supplies.push({category:'',item:'',vendor:'',alternate:'',unitCost:'',qty:'',shipping:''});renderSupplies()">Add Row</button></td></tr>`;
-}
-function renderSales(){
- salesTable.innerHTML=`<tr><th>Category</th><th>Item</th><th>Vendor</th><th>Unit Cost</th><th>Sell Price</th><th>Purchased</th><th>Sold</th><th>Processing Fees</th><th>Other Fees</th><th>Gross</th><th>Profit</th><th></th></tr>`+
- state.sales.map((r,i)=>{const gross=n(r.sellPrice)*n(r.sold),profit=gross-n(r.unitCost)*n(r.sold)-n(r.processingFees)-n(r.otherFees);return `<tr>
- <td><input value="${esc(r.category)}" oninput="state.sales[${i}].category=this.value"></td><td><input value="${esc(r.item)}" oninput="state.sales[${i}].item=this.value"></td><td><input value="${esc(r.vendor)}" oninput="state.sales[${i}].vendor=this.value"></td>
- <td><input type="number" min="0" step=".01" value="${esc(r.unitCost)}" oninput="state.sales[${i}].unitCost=this.value;renderSales();renderKpis()"></td><td><input type="number" min="0" step=".01" value="${esc(r.sellPrice)}" oninput="state.sales[${i}].sellPrice=this.value;renderSales();renderKpis()"></td>
- <td><input type="number" min="0" value="${esc(r.purchased)}" oninput="state.sales[${i}].purchased=this.value"></td><td><input type="number" min="0" value="${esc(r.sold)}" oninput="state.sales[${i}].sold=this.value;renderSales();renderKpis()"></td>
- <td><input type="number" min="0" step=".01" value="${esc(r.processingFees)}" oninput="state.sales[${i}].processingFees=this.value;renderSales();renderKpis()"></td><td><input type="number" min="0" step=".01" value="${esc(r.otherFees)}" oninput="state.sales[${i}].otherFees=this.value;renderSales();renderKpis()"></td>
- <td>${money(gross)}</td><td>${money(profit)}</td><td><button class="btn danger small" onclick="state.sales.splice(${i},1);render();saveState(true)">Delete</button></td></tr>`}).join("")+
- `<tr><td colspan="12"><button class="btn" onclick="state.sales.push({category:'',item:'',vendor:'',unitCost:'',sellPrice:'',purchased:'',sold:'',processingFees:'',otherFees:''});renderSales()">Add Row</button></td></tr>`;
-}
-function ticketInventoryUsed(name){
- return state.packages.reduce((sum,p)=>sum+p.items.reduce((s,x)=>s+(x.inventoryName===name?n(x.qtyPerTicket)*packageSold(p):0),0),0)
-}
-function renderInventory(){
- inventoryTable.innerHTML=`<tr><th>Item</th><th>Starting</th><th>Purchased</th><th>Manual Used</th><th>Ticket Used</th><th>Damaged/Lost</th><th>Ending</th><th>Reorder Level</th><th>Reorder?</th><th></th></tr>`+
- state.inventory.map((r,i)=>{const ticketUsed=ticketInventoryUsed(r.name),end=n(r.starting)+n(r.purchased)-n(r.manualUsed)-ticketUsed-n(r.damaged);return `<tr>
- <td><input value="${esc(r.name)}" oninput="state.inventory[${i}].name=this.value"></td><td><input type="number" value="${esc(r.starting)}" oninput="state.inventory[${i}].starting=this.value;renderInventory()"></td>
- <td><input type="number" value="${esc(r.purchased)}" oninput="state.inventory[${i}].purchased=this.value;renderInventory()"></td><td><input type="number" value="${esc(r.manualUsed)}" oninput="state.inventory[${i}].manualUsed=this.value;renderInventory()"></td>
- <td>${ticketUsed}</td><td><input type="number" value="${esc(r.damaged)}" oninput="state.inventory[${i}].damaged=this.value;renderInventory()"></td><td>${end}</td>
- <td><input type="number" value="${esc(r.reorderLevel)}" oninput="state.inventory[${i}].reorderLevel=this.value;renderInventory()"></td><td>${end<=n(r.reorderLevel)?'YES':'NO'}</td>
- <td><button class="btn danger small" onclick="state.inventory.splice(${i},1);render();saveState(true)">Delete</button></td></tr>`}).join("")+
- `<tr><td colspan="10"><button class="btn" onclick="state.inventory.push({name:'',starting:'',purchased:'',manualUsed:'',damaged:'',reorderLevel:''});renderInventory()">Add Row</button></td></tr>`;
-}
-function renderEventbrite(){
- const rows=state.eventbrite.orders||[];
- eventbriteTable.innerHTML=`<tr><th>Ticket Type</th><th>Ticket Class ID</th><th>Quantity Sold</th><th>Revenue</th></tr>`+
- rows.map(r=>`<tr><td>${esc(r.name)}</td><td>${esc(r.ticketClassId)}</td><td>${n(r.quantity)}</td><td>${money(r.revenue)}</td></tr>`).join("");
- ebStatus.innerHTML=state.eventbrite.lastSync?`Last synchronized: ${esc(state.eventbrite.lastSync)} <span class="badge">${rows.reduce((s,r)=>s+n(r.quantity),0)} tickets</span>`:"Not synchronized.";
-}
-async function connectorRequest(path){
- state.eventbrite.eventId=document.getElementById("ebEventId").value.trim();
- state.eventbrite.connectorUrl=document.getElementById("ebConnectorUrl").value.trim().replace(/\/$/,"");
- if(!state.eventbrite.connectorUrl)throw new Error("Enter the secure connector URL.");
- if(!state.eventbrite.eventId)throw new Error("Enter the Eventbrite Event ID.");
- const res=await fetch(`${state.eventbrite.connectorUrl}${path}?event_id=${encodeURIComponent(state.eventbrite.eventId)}`);
- const data=await res.json().catch(()=>({}));
- if(!res.ok)throw new Error(data.error||`Connection failed (${res.status}).`);
- return data;
-}
-async function loadTicketClasses(){
- ebStatus.textContent="Loading Eventbrite ticket types...";
- try{
-   const data=await connectorRequest("/ticket-classes");
-   state.eventbrite.ticketClasses=(data.ticket_classes||data.ticketClasses||[]).map(x=>({id:String(x.id),name:x.name||""}));
-   state.eventbrite.lastSync=new Date().toLocaleString();
-   render();saveState(true);ebStatus.textContent="Ticket types imported. Match each package using its Ticket Class ID dropdown.";
- }catch(e){ebStatus.textContent=e.message}
-}
-async function syncEventbrite(){
- ebStatus.textContent="Synchronizing Eventbrite sales...";
- try{
-   const data=await connectorRequest("/sales");
-   state.eventbrite.orders=(data.sales||[]).map(x=>({ticketClassId:String(x.ticketClassId||x.ticket_class_id||""),name:x.name||"",quantity:n(x.quantity),revenue:n(x.revenue)}));
-   state.packages.forEach(p=>{const row=state.eventbrite.orders.find(x=>String(x.ticketClassId)===String(p.eventbriteTicketClassId));p.eventbriteSold=row?n(row.quantity):0;p.eventbriteRevenue=row?n(row.revenue):0});
-   state.eventbrite.lastSync=new Date().toLocaleString();
-   render();saveState(true);
- }catch(e){ebStatus.textContent=e.message}
-}
-function renderKpis(){
- const venue=state.venue.reduce((s,r)=>s+(r.refundable?0:n(r.amount)),0);
- const deposits=state.venue.reduce((s,r)=>s+(r.refundable?n(r.amount):0),0);
- const supplies=state.supplies.reduce((s,r)=>s+n(r.unitCost)*n(r.qty)+n(r.shipping),0);
- const salesGross=state.sales.reduce((s,r)=>s+n(r.sellPrice)*n(r.sold),0);
- const salesProfit=state.sales.reduce((s,r)=>s+n(r.sellPrice)*n(r.sold)-n(r.unitCost)*n(r.sold)-n(r.processingFees)-n(r.otherFees),0);
- const ticketRevenue=totalPackageRevenue(),ticketCosts=totalPackageCosts(),ticketFees=totalPackageFees();
- const revenue=ticketRevenue+n(state.event.sponsor)+n(state.event.otherIncome)+salesGross;
- const profit=ticketRevenue-ticketCosts-ticketFees+n(state.event.sponsor)+n(state.event.otherIncome)-venue-supplies+salesProfit;
- const sold=state.packages.reduce((s,p)=>s+packageSold(p),0);
- const vals=[["Tickets Sold",sold,false],["Ticket Revenue",ticketRevenue,true],["Ticket Item Costs",ticketCosts,true],["Eventbrite Fees",ticketFees,true],["Other Sales",salesGross,true],["Operating Costs",venue+supplies,true],["Refundable Deposits",deposits,true],["Total Revenue",revenue,true],["Estimated Profit",profit,true]];
- kpis.innerHTML=vals.map(([l,v,m])=>`<div class="kpi">${l}<b>${m?money(v):v}</b></div>`).join("");
-}
-function exportData(){saveState(true);const b=new Blob([JSON.stringify(state,null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="sip-paint-planner-backup.json";a.click();URL.revokeObjectURL(a.href)}
-function importData(e){const f=e.target.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{try{state=JSON.parse(rd.result);saveState(true);render()}catch(err){alert("That backup file is not valid.")}};rd.readAsText(f)}
-document.addEventListener("focusin",e=>{if(e.target.matches("input:not([type=checkbox]):not([type=file]),textarea"))e.target.select?.()});
+const blankPackage=(name="",price="")=>({name,eventbriteTicketClassId:"",price,manualSold:"",eventbriteSold:0,eventbriteRevenue:0,fees:0,items:[blankItem()]});
+const blankVendor=()=>({name:"",contact:"",phone:"",email:"",website:"",address:"",category:"",taxId:"",notes:"",active:true,defaultModel:"perItem",flatRate:"",perItemRate:"",percentage:"",minimum:"",paid:""});
+const blankAddon=()=>({name:"",description:"",vendorId:"",customerPrice:"",sold:"",processingFees:"",otherFees:"",paymentModel:"vendorDefault",flatRate:"",perItemRate:"",percentage:"",minimum:"",inventoryName:"",inventoryQty:""});
+const defaultState={business:{name:"",owner:"",logo:"",address:"",city:"",state:"",zip:"",phone:"",email:"",website:"",instagram:"",facebook:"",taxRate:"",taxId:"",notes:""},event:{name:"",date:"",location:"",expectedGuests:"",sponsor:"",otherIncome:""},eventbrite:{eventId:"",connectorUrl:"",lastSync:"",orders:[],ticketClasses:[]},packages:[{...blankPackage("Standard Paint Package","40"),items:[{name:"9 × 12 canvas and painting supplies",category:"Painting experience",unitCost:"",qtyPerTicket:"1",inventoryName:""}]},{...blankPackage("Upgrade Paint Package","50"),items:[{name:"11 × 14 canvas and painting supplies",category:"Painting experience",unitCost:"",qtyPerTicket:"1",inventoryName:""}]}],vendors:[blankVendor()],addons:[{...blankAddon(),name:"Bottle of Wine",description:"Optional bottle of wine",customerPrice:""},{...blankAddon(),name:"Appetizers / Food",description:"Optional appetizers or food",customerPrice:""}],venue:[{name:"",amount:"",refundable:false}],supplies:[{category:"",item:"",vendorId:"",alternate:"",unitCost:"",qty:"",shipping:""}],sales:[{category:"",item:"",vendorId:"",unitCost:"",sellPrice:"",purchased:"",sold:"",processingFees:"",otherFees:""}],inventory:[{name:"",starting:"",purchased:"",manualUsed:"",damaged:"",reorderLevel:""}]};
+let state;try{const saved=JSON.parse(localStorage.getItem("sipPaintPlannerV5"))||JSON.parse(localStorage.getItem("sipPaintPlannerV4"))||{};state={...structuredClone(defaultState),...saved,business:{...defaultState.business,...(saved.business||{})},event:{...defaultState.event,...(saved.event||{})},eventbrite:{...defaultState.eventbrite,...(saved.eventbrite||{})},packages:saved.packages?.length?saved.packages:structuredClone(defaultState.packages),vendors:saved.vendors?.length?saved.vendors:structuredClone(defaultState.vendors),addons:saved.addons?.length?saved.addons:structuredClone(defaultState.addons)}}catch(e){state=structuredClone(defaultState)}
+function n(v){return Number(v)||0}const money=v=>new Intl.NumberFormat("en-US",{style:"currency",currency:"USD"}).format(n(v));const esc=v=>String(v??"").replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;").replace(/>/g,"&gt;");const selected=(a,b)=>String(a)===String(b)?"selected":"";
+function saveState(silent=false){localStorage.setItem("sipPaintPlannerV5",JSON.stringify(state));if(!silent)alert("Saved on this device.")}
+function packageItemCost(p){return (p.items||[]).reduce((s,x)=>s+n(x.unitCost)*n(x.qtyPerTicket),0)}function packageSold(p){return n(p.manualSold)+n(p.eventbriteSold)}function packageRevenue(p){return n(p.price)*n(p.manualSold)+n(p.eventbriteRevenue)}function packageProfit(p){return packageRevenue(p)-packageItemCost(p)*packageSold(p)-n(p.fees)}function totalPackageRevenue(){return state.packages.reduce((s,p)=>s+packageRevenue(p),0)}function totalPackageCosts(){return state.packages.reduce((s,p)=>s+packageItemCost(p)*packageSold(p),0)}function totalPackageFees(){return state.packages.reduce((s,p)=>s+n(p.fees),0)}
+function vendorById(id){return state.vendors.find(v=>v.id===id)}function ensureIds(){state.vendors.forEach(v=>{if(!v.id)v.id=crypto.randomUUID?crypto.randomUUID():String(Date.now()+Math.random())})}
+function agreementForAddon(a){const v=vendorById(a.vendorId)||{};const model=a.paymentModel==="vendorDefault"?(v.defaultModel||"perItem"):a.paymentModel;return{model,flatRate:a.paymentModel==="vendorDefault"?v.flatRate:a.flatRate,perItemRate:a.paymentModel==="vendorDefault"?v.perItemRate:a.perItemRate,percentage:a.paymentModel==="vendorDefault"?v.percentage:a.percentage,minimum:a.paymentModel==="vendorDefault"?v.minimum:a.minimum}}
+function addonRevenue(a){return n(a.customerPrice)*n(a.sold)}function addonVendorPayout(a){const g=agreementForAddon(a),gross=addonRevenue(a),qty=n(a.sold);let payout=0;if(g.model==="flat")payout=n(g.flatRate);if(g.model==="perItem")payout=n(g.perItemRate)*qty;if(g.model==="percentage")payout=gross*n(g.percentage)/100;if(g.model==="hybrid")payout=n(g.flatRate)+gross*n(g.percentage)/100;if(g.model==="minimumPercentage")payout=Math.max(n(g.minimum),gross*n(g.percentage)/100);return payout}function addonProfit(a){return addonRevenue(a)-addonVendorPayout(a)-n(a.processingFees)-n(a.otherFees)}function totalAddonRevenue(){return state.addons.reduce((s,a)=>s+addonRevenue(a),0)}function totalVendorPayouts(){return state.addons.reduce((s,a)=>s+addonVendorPayout(a),0)}function totalAddonFees(){return state.addons.reduce((s,a)=>s+n(a.processingFees)+n(a.otherFees),0)}
+function venueCosts(){return state.venue.reduce((s,r)=>s+(r.refundable?0:n(r.amount)),0)}function supplyCosts(){return state.supplies.reduce((s,r)=>s+n(r.unitCost)*n(r.qty)+n(r.shipping),0)}function otherSalesRevenue(){return state.sales.reduce((s,r)=>s+n(r.sellPrice)*n(r.sold),0)}function otherSalesCosts(){return state.sales.reduce((s,r)=>s+n(r.unitCost)*n(r.sold)+n(r.processingFees)+n(r.otherFees),0)}function attendees(){const sold=state.packages.reduce((s,p)=>s+packageSold(p),0);return sold||n(state.event.expectedGuests)}function totalRevenue(){return totalPackageRevenue()+totalAddonRevenue()+otherSalesRevenue()+n(state.event.otherIncome)}function totalCosts(){return totalPackageCosts()+totalPackageFees()+totalVendorPayouts()+totalAddonFees()+venueCosts()+supplyCosts()+otherSalesCosts()}function netProfit(){return totalRevenue()-totalCosts()}function costPerCustomer(){return attendees()?totalCosts()/attendees():0}function revenuePerCustomer(){return attendees()?totalRevenue()/attendees():0}
+function render(){ensureIds();renderBusiness();renderEvent();renderPackages();renderAddons();renderVendors();renderVenue();renderSupplies();renderSales();renderInventory();renderEventbrite();renderKpis();ebEventId.value=state.eventbrite.eventId||"";ebConnectorUrl.value=state.eventbrite.connectorUrl||"";saveState(true)}
+function handleLogoUpload(e){const f=e.target.files?.[0];if(!f)return;if(!f.type.startsWith("image/")){alert("Please select an image file.");return}if(f.size>1500000){alert("Please choose an image smaller than 1.5 MB.");return}const r=new FileReader();r.onload=()=>{state.business.logo=r.result;renderBusiness();saveState(true)};r.readAsDataURL(f)}function removeBusinessLogo(){state.business.logo="";renderBusiness();saveState(true)}
+function renderBusiness(){const b=state.business,fields=[["name","Business Name","text"],["owner","Owner Name","text"],["address","Street Address","text"],["city","City","text"],["state","State","text"],["zip","ZIP Code","text"],["phone","Phone","tel"],["email","Email","email"],["website","Website","url"],["instagram","Instagram","text"],["facebook","Facebook","text"],["taxRate","Tax Rate (%)","number"],["taxId","Tax ID","text"]];businessInputs.innerHTML=`<div class="wide"><label>Business Logo</label><input type="url" placeholder="Paste image URL or upload below" value="${b.logo?.startsWith('data:')?'':esc(b.logo)}" onfocus="this.select()" onchange="state.business.logo=this.value;renderBusiness();saveState(true)"><input type="file" accept="image/*" onchange="handleLogoUpload(event)">${b.logo?`<img class="logo-preview" src="${esc(b.logo)}" alt="Logo preview"><button class="btn danger small" onclick="removeBusinessLogo()">Remove Logo</button>`:''}</div>`+fields.map(([k,l,t])=>`<div><label>${l}</label><input type="${t}" ${k==='taxRate'?'step="0.01"':''} placeholder="Enter ${l.toLowerCase()}" value="${esc(b[k])}" onfocus="this.select()" oninput="state.business.${k}=this.value;saveState(true)"></div>`).join("")+`<div class="wide"><label>Business Notes</label><textarea placeholder="Enter business notes" onfocus="this.select()" oninput="state.business.notes=this.value;saveState(true)">${esc(b.notes)}</textarea></div>`}
+function renderEvent(){const e=state.event,fields=[["name","Event Name","text"],["date","Event Date","date"],["location","Location","text"],["expectedGuests","Expected Guests","number"],["sponsor","Sponsor Income","number"],["otherIncome","Other Income","number"]];eventInputs.innerHTML=fields.map(([k,l,t])=>`<div><label>${l}</label><input type="${t}" ${t==='number'?'step="0.01" min="0"':''} placeholder="Enter ${l.toLowerCase()}" value="${esc(e[k])}" onfocus="this.select()" oninput="state.event.${k}=this.value;renderKpis();saveState(true)"></div>`).join("")}
+function renderKpis(){const a=attendees(),profit=netProfit();kpis.innerHTML=[["Total Revenue",money(totalRevenue())],["Total Costs",money(totalCosts())],["Net Profit",money(profit)],["Customers",a],["Cost per Customer",money(costPerCustomer())],["Revenue per Customer",money(revenuePerCustomer())],["Vendor Payouts",money(totalVendorPayouts())],["Break-even Customers",revenuePerCustomer()>costPerCustomer()&&revenuePerCustomer()>0?Math.ceil((venueCosts()+supplyCosts())/(revenuePerCustomer()-costPerCustomer())):"—"]].map(([l,v],i)=>`<div class="kpi"><span>${l}</span><b class="${l==='Net Profit'?(profit>=0?'positive':'negative'):''}">${v}</b></div>`).join("")}
+function addPackage(){state.packages.push(blankPackage());renderPackages()}function deletePackage(i){if(confirm("Delete this ticket package?")){state.packages.splice(i,1);render();saveState(true)}}function addPackageItem(i){state.packages[i].items.push(blankItem());renderPackages()}function deletePackageItem(i,j){state.packages[i].items.splice(j,1);render();saveState(true)}
+function renderPackages(){packages.innerHTML=state.packages.map((p,i)=>{const sold=packageSold(p),unit=packageItemCost(p),rev=packageRevenue(p),profit=packageProfit(p);return`<div class="package"><div class="package-head"><div><label>Package Name</label><input placeholder="Enter package name" value="${esc(p.name)}" onfocus="this.select()" oninput="state.packages[${i}].name=this.value;saveState(true)"></div><div><label>Ticket Price</label><input type="number" min="0" step=".01" value="${esc(p.price)}" onfocus="this.select()" oninput="state.packages[${i}].price=this.value;renderPackages();renderKpis();saveState(true)"></div><div><label>Manual Sold</label><input type="number" min="0" value="${esc(p.manualSold)}" onfocus="this.select()" oninput="state.packages[${i}].manualSold=this.value;render();"></div><div><label>Eventbrite Sold</label><input value="${esc(p.eventbriteSold)}" disabled></div><div><label>Eventbrite Revenue</label><input value="${money(p.eventbriteRevenue)}" disabled></div><div><label>Eventbrite Fees</label><input type="number" min="0" step=".01" value="${esc(p.fees)}" onfocus="this.select()" oninput="state.packages[${i}].fees=this.value;renderPackages();renderKpis();saveState(true)"></div><div><label>Ticket Class</label><select onchange="state.packages[${i}].eventbriteTicketClassId=this.value;saveState(true)"><option value="">None</option>${state.eventbrite.ticketClasses.map(tc=>`<option value="${esc(tc.id)}" ${selected(p.eventbriteTicketClassId,tc.id)}>${esc(tc.name)}</option>`).join("")}</select></div><button class="btn danger small" onclick="deletePackage(${i})">Delete</button></div><div class="package-body"><div class="scroll"><table><tr><th>Included Item</th><th>Category</th><th>Unit Cost</th><th>Qty per Ticket</th><th>Inventory Item</th><th>Line Cost</th><th></th></tr>${p.items.map((x,j)=>`<tr><td><input placeholder="Included item" value="${esc(x.name)}" onfocus="this.select()" oninput="state.packages[${i}].items[${j}].name=this.value;saveState(true)"></td><td><input placeholder="Category" value="${esc(x.category)}" onfocus="this.select()" oninput="state.packages[${i}].items[${j}].category=this.value;saveState(true)"></td><td><input type="number" min="0" step=".01" value="${esc(x.unitCost)}" onfocus="this.select()" oninput="state.packages[${i}].items[${j}].unitCost=this.value;render();"></td><td><input type="number" min="0" step=".01" value="${esc(x.qtyPerTicket)}" onfocus="this.select()" oninput="state.packages[${i}].items[${j}].qtyPerTicket=this.value;render();"></td><td><select onchange="state.packages[${i}].items[${j}].inventoryName=this.value;renderInventory();saveState(true)"><option value=""></option>${state.inventory.map(inv=>`<option ${selected(x.inventoryName,inv.name)}>${esc(inv.name)}</option>`).join("")}</select></td><td>${money(n(x.unitCost)*n(x.qtyPerTicket))}</td><td><button class="btn danger small" onclick="deletePackageItem(${i},${j})">Delete</button></td></tr>`).join("")}</table></div><div class="actions"><button class="btn" onclick="addPackageItem(${i})">Add Included Item</button></div></div><div class="summary"><span>Cost per ticket: <b>${money(unit)}</b></span><span>Sold: <b>${sold}</b></span><span>Revenue: <b>${money(rev)}</b></span><span>Profit: <b class="${profit>=0?'positive':'negative'}">${money(profit)}</b></span></div></div>`}).join("")}
+function addVendor(){state.vendors.push(blankVendor());ensureIds();renderVendors()}function deleteVendor(i){if(confirm("Delete this vendor? Add-ons linked to it will become unassigned.")){const id=state.vendors[i].id;state.vendors.splice(i,1);state.addons.forEach(a=>{if(a.vendorId===id)a.vendorId=""});render();saveState(true)}}
+function renderVendors(){vendorsList.innerHTML=state.vendors.map((v,i)=>`<div class="vendor-card"><div class="vendor-head"><div><label>Vendor / Business Name</label><input placeholder="Enter vendor name" value="${esc(v.name)}" onfocus="this.select()" oninput="state.vendors[${i}].name=this.value;renderAddons();saveState(true)"></div><div><label>Category</label><input placeholder="Food, drinks, DJ, venue..." value="${esc(v.category)}" onfocus="this.select()" oninput="state.vendors[${i}].category=this.value;saveState(true)"></div><div><label>Contact Person</label><input value="${esc(v.contact)}" placeholder="Contact name" onfocus="this.select()" oninput="state.vendors[${i}].contact=this.value;saveState(true)"></div><div><label>Phone</label><input type="tel" value="${esc(v.phone)}" placeholder="Phone" onfocus="this.select()" oninput="state.vendors[${i}].phone=this.value;saveState(true)"></div><div><label>Email</label><input type="email" value="${esc(v.email)}" placeholder="Email" onfocus="this.select()" oninput="state.vendors[${i}].email=this.value;saveState(true)"></div><div><label>Status</label><select onchange="state.vendors[${i}].active=this.value==='true';saveState(true)"><option value="true" ${v.active!==false?'selected':''}>Active</option><option value="false" ${v.active===false?'selected':''}>Inactive</option></select></div><button class="btn danger small" onclick="deleteVendor(${i})">Delete</button></div><div class="vendor-body"><div class="grid"><div><label>Website</label><input type="url" value="${esc(v.website)}" placeholder="Website" onfocus="this.select()" oninput="state.vendors[${i}].website=this.value;saveState(true)"></div><div><label>Address</label><input value="${esc(v.address)}" placeholder="Address" onfocus="this.select()" oninput="state.vendors[${i}].address=this.value;saveState(true)"></div><div><label>Tax ID</label><input value="${esc(v.taxId)}" placeholder="Optional tax ID" onfocus="this.select()" oninput="state.vendors[${i}].taxId=this.value;saveState(true)"></div><div><label>Default Payment Model</label><select onchange="state.vendors[${i}].defaultModel=this.value;render();"><option value="flat" ${selected(v.defaultModel,'flat')}>Flat rate</option><option value="perItem" ${selected(v.defaultModel,'perItem')}>Per item sold</option><option value="percentage" ${selected(v.defaultModel,'percentage')}>Percentage of sales</option><option value="hybrid" ${selected(v.defaultModel,'hybrid')}>Flat + percentage</option><option value="minimumPercentage" ${selected(v.defaultModel,'minimumPercentage')}>Minimum or percentage</option></select></div><div><label>Flat Rate</label><input type="number" step=".01" min="0" value="${esc(v.flatRate)}" onfocus="this.select()" oninput="state.vendors[${i}].flatRate=this.value;renderKpis();saveState(true)"></div><div><label>Per-item Rate</label><input type="number" step=".01" min="0" value="${esc(v.perItemRate)}" onfocus="this.select()" oninput="state.vendors[${i}].perItemRate=this.value;renderKpis();saveState(true)"></div><div><label>Percentage</label><input type="number" step=".01" min="0" value="${esc(v.percentage)}" onfocus="this.select()" oninput="state.vendors[${i}].percentage=this.value;renderKpis();saveState(true)"></div><div><label>Minimum Payout</label><input type="number" step=".01" min="0" value="${esc(v.minimum)}" onfocus="this.select()" oninput="state.vendors[${i}].minimum=this.value;renderKpis();saveState(true)"></div><div><label>Amount Already Paid</label><input type="number" step=".01" min="0" value="${esc(v.paid)}" onfocus="this.select()" oninput="state.vendors[${i}].paid=this.value;saveState(true)"></div><div class="wide"><label>Notes</label><textarea placeholder="Agreement, products, invoices, due dates..." onfocus="this.select()" oninput="state.vendors[${i}].notes=this.value;saveState(true)">${esc(v.notes)}</textarea></div></div></div><div class="summary"><span>Calculated earnings from add-ons: <b>${money(state.addons.filter(a=>a.vendorId===v.id).reduce((s,a)=>s+addonVendorPayout(a),0))}</b></span><span>Already paid: <b>${money(v.paid)}</b></span><span>Balance due: <b>${money(Math.max(0,state.addons.filter(a=>a.vendorId===v.id).reduce((s,a)=>s+addonVendorPayout(a),0)-n(v.paid)))}</b></span></div></div>`).join("")}
+function addAddon(){state.addons.push(blankAddon());renderAddons()}function deleteAddon(i){if(confirm("Delete this add-on?")){state.addons.splice(i,1);render();saveState(true)}}
+function renderAddons(){addonsList.innerHTML=state.addons.map((a,i)=>{const g=agreementForAddon(a),rev=addonRevenue(a),pay=addonVendorPayout(a),profit=addonProfit(a);return`<div class="addon-card"><div class="addon-head"><div><label>Add-on Name</label><input value="${esc(a.name)}" placeholder="Add-on name" onfocus="this.select()" oninput="state.addons[${i}].name=this.value;saveState(true)"></div><div><label>Customer Price</label><input type="number" step=".01" min="0" value="${esc(a.customerPrice)}" onfocus="this.select()" oninput="state.addons[${i}].customerPrice=this.value;render();"></div><div><label>Quantity Sold</label><input type="number" min="0" value="${esc(a.sold)}" onfocus="this.select()" oninput="state.addons[${i}].sold=this.value;render();"></div><div><label>Vendor</label><select onchange="state.addons[${i}].vendorId=this.value;render();"><option value="">No vendor</option>${state.vendors.map(v=>`<option value="${v.id}" ${selected(a.vendorId,v.id)}>${esc(v.name||'Unnamed vendor')}</option>`).join("")}</select></div><div><label>Payment Model</label><select onchange="state.addons[${i}].paymentModel=this.value;render();"><option value="vendorDefault" ${selected(a.paymentModel,'vendorDefault')}>Use vendor default</option><option value="flat" ${selected(a.paymentModel,'flat')}>Flat rate</option><option value="perItem" ${selected(a.paymentModel,'perItem')}>Per item sold</option><option value="percentage" ${selected(a.paymentModel,'percentage')}>Percentage of sales</option><option value="hybrid" ${selected(a.paymentModel,'hybrid')}>Flat + percentage</option><option value="minimumPercentage" ${selected(a.paymentModel,'minimumPercentage')}>Minimum or percentage</option></select></div><button class="btn danger small" onclick="deleteAddon(${i})">Delete</button></div><div class="addon-body"><div class="grid"><div class="wide"><label>Description</label><textarea placeholder="Describe what the customer receives" onfocus="this.select()" oninput="state.addons[${i}].description=this.value;saveState(true)">${esc(a.description)}</textarea></div><div><label>Flat Rate Override</label><input type="number" step=".01" min="0" value="${esc(a.flatRate)}" onfocus="this.select()" oninput="state.addons[${i}].flatRate=this.value;render();"></div><div><label>Per-item Rate Override</label><input type="number" step=".01" min="0" value="${esc(a.perItemRate)}" onfocus="this.select()" oninput="state.addons[${i}].perItemRate=this.value;render();"></div><div><label>Percentage Override</label><input type="number" step=".01" min="0" value="${esc(a.percentage)}" onfocus="this.select()" oninput="state.addons[${i}].percentage=this.value;render();"></div><div><label>Minimum Override</label><input type="number" step=".01" min="0" value="${esc(a.minimum)}" onfocus="this.select()" oninput="state.addons[${i}].minimum=this.value;render();"></div><div><label>Processing Fees</label><input type="number" step=".01" min="0" value="${esc(a.processingFees)}" onfocus="this.select()" oninput="state.addons[${i}].processingFees=this.value;render();"></div><div><label>Other Fees</label><input type="number" step=".01" min="0" value="${esc(a.otherFees)}" onfocus="this.select()" oninput="state.addons[${i}].otherFees=this.value;render();"></div><div><label>Inventory Item</label><select onchange="state.addons[${i}].inventoryName=this.value;renderInventory();saveState(true)"><option value=""></option>${state.inventory.map(inv=>`<option ${selected(a.inventoryName,inv.name)}>${esc(inv.name)}</option>`).join("")}</select></div><div><label>Inventory Qty per Add-on</label><input type="number" step=".01" min="0" value="${esc(a.inventoryQty)}" onfocus="this.select()" oninput="state.addons[${i}].inventoryQty=this.value;renderInventory();saveState(true)"></div></div></div><div class="summary"><span>Applied model: <b>${esc(g.model)}</b></span><span>Gross revenue: <b>${money(rev)}</b></span><span>Vendor payout: <b>${money(pay)}</b></span><span>Your profit: <b class="${profit>=0?'positive':'negative'}">${money(profit)}</b></span></div></div>`}).join("")}
+function renderVenue(){venueTable.innerHTML=`<tr><th>Fee / Deposit</th><th>Amount</th><th>Refundable?</th><th>Operating Cost</th><th></th></tr>`+state.venue.map((r,i)=>`<tr><td><input placeholder="Venue fee" value="${esc(r.name)}" onfocus="this.select()" oninput="state.venue[${i}].name=this.value;saveState(true)"></td><td><input type="number" step=".01" min="0" value="${esc(r.amount)}" onfocus="this.select()" oninput="state.venue[${i}].amount=this.value;renderKpis();saveState(true)"></td><td><input type="checkbox" ${r.refundable?'checked':''} onchange="state.venue[${i}].refundable=this.checked;renderKpis();saveState(true)"></td><td>${money(r.refundable?0:r.amount)}</td><td><button class="btn danger small" onclick="state.venue.splice(${i},1);render();">Delete</button></td></tr>`).join("")+`<tr><td colspan="5"><button class="btn" onclick="state.venue.push({name:'',amount:'',refundable:false});renderVenue()">Add Row</button></td></tr>`}
+function renderSupplies(){supplyTable.innerHTML=`<tr><th>Category</th><th>Item</th><th>Vendor</th><th>Alternate</th><th>Unit Cost</th><th>Qty</th><th>Shipping</th><th>Total</th><th></th></tr>`+state.supplies.map((r,i)=>`<tr><td><input value="${esc(r.category)}" placeholder="Category" onfocus="this.select()" oninput="state.supplies[${i}].category=this.value;saveState(true)"></td><td><input value="${esc(r.item)}" placeholder="Item" onfocus="this.select()" oninput="state.supplies[${i}].item=this.value;saveState(true)"></td><td><select onchange="state.supplies[${i}].vendorId=this.value;saveState(true)"><option value="">No vendor</option>${state.vendors.map(v=>`<option value="${v.id}" ${selected(r.vendorId,v.id)}>${esc(v.name||'Unnamed vendor')}</option>`).join("")}</select></td><td><input value="${esc(r.alternate)}" placeholder="Alternate source" onfocus="this.select()" oninput="state.supplies[${i}].alternate=this.value;saveState(true)"></td><td><input type="number" step=".01" min="0" value="${esc(r.unitCost)}" onfocus="this.select()" oninput="state.supplies[${i}].unitCost=this.value;render();"></td><td><input type="number" step=".01" min="0" value="${esc(r.qty)}" onfocus="this.select()" oninput="state.supplies[${i}].qty=this.value;render();"></td><td><input type="number" step=".01" min="0" value="${esc(r.shipping)}" onfocus="this.select()" oninput="state.supplies[${i}].shipping=this.value;render();"></td><td>${money(n(r.unitCost)*n(r.qty)+n(r.shipping))}</td><td><button class="btn danger small" onclick="state.supplies.splice(${i},1);render();">Delete</button></td></tr>`).join("")+`<tr><td colspan="9"><button class="btn" onclick="state.supplies.push({category:'',item:'',vendorId:'',alternate:'',unitCost:'',qty:'',shipping:''});renderSupplies()">Add Row</button></td></tr>`}
+function renderSales(){salesTable.innerHTML=`<tr><th>Category</th><th>Item</th><th>Vendor</th><th>Unit Cost</th><th>Sell Price</th><th>Purchased</th><th>Sold</th><th>Processing Fees</th><th>Other Fees</th><th>Gross</th><th>Profit</th><th></th></tr>`+state.sales.map((r,i)=>{const gross=n(r.sellPrice)*n(r.sold),profit=gross-n(r.unitCost)*n(r.sold)-n(r.processingFees)-n(r.otherFees);return`<tr><td><input value="${esc(r.category)}" placeholder="Category" onfocus="this.select()" oninput="state.sales[${i}].category=this.value;saveState(true)"></td><td><input value="${esc(r.item)}" placeholder="Item" onfocus="this.select()" oninput="state.sales[${i}].item=this.value;saveState(true)"></td><td><select onchange="state.sales[${i}].vendorId=this.value;saveState(true)"><option value="">No vendor</option>${state.vendors.map(v=>`<option value="${v.id}" ${selected(r.vendorId,v.id)}>${esc(v.name||'Unnamed vendor')}</option>`).join("")}</select></td><td><input type="number" step=".01" min="0" value="${esc(r.unitCost)}" onfocus="this.select()" oninput="state.sales[${i}].unitCost=this.value;render();"></td><td><input type="number" step=".01" min="0" value="${esc(r.sellPrice)}" onfocus="this.select()" oninput="state.sales[${i}].sellPrice=this.value;render();"></td><td><input type="number" min="0" value="${esc(r.purchased)}" onfocus="this.select()" oninput="state.sales[${i}].purchased=this.value;saveState(true)"></td><td><input type="number" min="0" value="${esc(r.sold)}" onfocus="this.select()" oninput="state.sales[${i}].sold=this.value;render();"></td><td><input type="number" step=".01" min="0" value="${esc(r.processingFees)}" onfocus="this.select()" oninput="state.sales[${i}].processingFees=this.value;render();"></td><td><input type="number" step=".01" min="0" value="${esc(r.otherFees)}" onfocus="this.select()" oninput="state.sales[${i}].otherFees=this.value;render();"></td><td>${money(gross)}</td><td>${money(profit)}</td><td><button class="btn danger small" onclick="state.sales.splice(${i},1);render();">Delete</button></td></tr>`}).join("")+`<tr><td colspan="12"><button class="btn" onclick="state.sales.push({category:'',item:'',vendorId:'',unitCost:'',sellPrice:'',purchased:'',sold:'',processingFees:'',otherFees:''});renderSales()">Add Row</button></td></tr>`}
+function ticketInventoryUsed(name){return state.packages.reduce((sum,p)=>sum+(p.items||[]).reduce((s,x)=>s+(x.inventoryName===name?n(x.qtyPerTicket)*packageSold(p):0),0),0)}function addonInventoryUsed(name){return state.addons.reduce((s,a)=>s+(a.inventoryName===name?n(a.inventoryQty)*n(a.sold):0),0)}
+function renderInventory(){inventoryTable.innerHTML=`<tr><th>Item</th><th>Starting</th><th>Purchased</th><th>Manual Used</th><th>Ticket Used</th><th>Add-on Used</th><th>Damaged</th><th>Ending</th><th>Reorder Level</th><th>Reorder?</th><th></th></tr>`+state.inventory.map((r,i)=>{const tu=ticketInventoryUsed(r.name),au=addonInventoryUsed(r.name),end=n(r.starting)+n(r.purchased)-n(r.manualUsed)-tu-au-n(r.damaged);return`<tr><td><input value="${esc(r.name)}" placeholder="Inventory item" onfocus="this.select()" oninput="state.inventory[${i}].name=this.value;render();"></td><td><input type="number" value="${esc(r.starting)}" onfocus="this.select()" oninput="state.inventory[${i}].starting=this.value;renderInventory();saveState(true)"></td><td><input type="number" value="${esc(r.purchased)}" onfocus="this.select()" oninput="state.inventory[${i}].purchased=this.value;renderInventory();saveState(true)"></td><td><input type="number" value="${esc(r.manualUsed)}" onfocus="this.select()" oninput="state.inventory[${i}].manualUsed=this.value;renderInventory();saveState(true)"></td><td>${tu}</td><td>${au}</td><td><input type="number" value="${esc(r.damaged)}" onfocus="this.select()" oninput="state.inventory[${i}].damaged=this.value;renderInventory();saveState(true)"></td><td>${end}</td><td><input type="number" value="${esc(r.reorderLevel)}" onfocus="this.select()" oninput="state.inventory[${i}].reorderLevel=this.value;renderInventory();saveState(true)"></td><td>${end<=n(r.reorderLevel)?'<b class="negative">YES</b>':'NO'}</td><td><button class="btn danger small" onclick="state.inventory.splice(${i},1);render();">Delete</button></td></tr>`}).join("")+`<tr><td colspan="11"><button class="btn" onclick="state.inventory.push({name:'',starting:'',purchased:'',manualUsed:'',damaged:'',reorderLevel:''});renderInventory()">Add Row</button></td></tr>`}
+function renderEventbrite(){const rows=state.eventbrite.orders||[];eventbriteTable.innerHTML=`<tr><th>Ticket Type</th><th>Ticket Class ID</th><th>Quantity Sold</th><th>Revenue</th></tr>`+rows.map(r=>`<tr><td>${esc(r.name)}</td><td>${esc(r.ticketClassId)}</td><td>${n(r.quantity)}</td><td>${money(r.revenue)}</td></tr>`).join("");ebStatus.innerHTML=state.eventbrite.lastSync?`Last synchronized: ${esc(state.eventbrite.lastSync)} <span class="badge">${rows.reduce((s,r)=>s+n(r.quantity),0)} tickets</span>`:"Not synchronized."}
+async function connectorRequest(path){state.eventbrite.eventId=ebEventId.value.trim();state.eventbrite.connectorUrl=ebConnectorUrl.value.trim().replace(/\/$/,"");if(!state.eventbrite.connectorUrl)throw new Error("Enter the secure connector URL.");if(!state.eventbrite.eventId)throw new Error("Enter the Eventbrite Event ID.");const res=await fetch(`${state.eventbrite.connectorUrl}${path}?event_id=${encodeURIComponent(state.eventbrite.eventId)}`);const data=await res.json().catch(()=>({}));if(!res.ok)throw new Error(data.error||`Connector error ${res.status}`);return data}
+async function loadTicketClasses(){try{ebStatus.textContent="Loading ticket types...";const d=await connectorRequest("/ticket-classes");state.eventbrite.ticketClasses=d.ticketClasses||d.ticket_classes||[];saveState(true);render();alert("Ticket types imported.")}catch(e){ebStatus.textContent=e.message}}
+async function syncEventbrite(){try{ebStatus.textContent="Synchronizing...";const d=await connectorRequest("/sales");const rows=d.orders||d.sales||[];state.eventbrite.orders=rows.map(r=>({name:r.name||r.ticket_name||"Ticket",ticketClassId:r.ticketClassId||r.ticket_class_id||"",quantity:n(r.quantity||r.sold),revenue:n(r.revenue||r.gross)}));state.packages.forEach(p=>{const m=state.eventbrite.orders.find(r=>String(r.ticketClassId)===String(p.eventbriteTicketClassId));p.eventbriteSold=m?n(m.quantity):0;p.eventbriteRevenue=m?n(m.revenue):0});state.eventbrite.lastSync=new Date().toLocaleString();saveState(true);render()}catch(e){ebStatus.textContent=e.message}}
+function exportData(){saveState(true);const blob=new Blob([JSON.stringify(state,null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=`sip-paint-planner-${new Date().toISOString().slice(0,10)}.json`;a.click();URL.revokeObjectURL(a.href)}function importData(e){const f=e.target.files?.[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{state={...structuredClone(defaultState),...JSON.parse(r.result)};saveState(true);render();alert("Backup imported.")}catch{alert("That backup file could not be read.")}};r.readAsText(f)}
 render();
-if("serviceWorker" in navigator)navigator.serviceWorker.register("service-worker.js").catch(()=>{});
 </script>
-</body></html>
+</body>
+</html>

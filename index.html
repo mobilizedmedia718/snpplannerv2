@@ -39,6 +39,14 @@ th,td{padding:7px;border:1px solid var(--border);text-align:left;vertical-align:
 <header><h1>Sip & Paint Business Planner</h1><div class="sub">Tickets, Eventbrite sales, package items, inventory, expenses and profit</div></header>
 <nav id="nav"></nav>
 <main>
+<section id="business" class="tab">
+  <div class="card">
+    <h2>Business Profile</h2>
+    <p class="muted">Business information is saved automatically on this device.</p>
+    <div class="grid" id="businessInputs"></div>
+  </div>
+</section>
+
 <section id="dashboard" class="tab active">
   <div class="kpis" id="kpis"></div>
   <div class="card"><h2>Event Information</h2><div class="grid" id="eventInputs"></div></div>
@@ -85,13 +93,14 @@ th,td{padding:7px;border:1px solid var(--border);text-align:left;vertical-align:
 </main>
 
 <script>
-const tabs=[["dashboard","Dashboard"],["tickets","Ticket Packages"],["eventbrite","Eventbrite"],["venue","Venue"],["supplies","Supplies"],["sales","Sales"],["inventory","Inventory"]];
+const tabs=[["dashboard","Dashboard"],["business","Business Profile"],["tickets","Ticket Packages"],["eventbrite","Eventbrite"],["venue","Venue"],["supplies","Supplies"],["sales","Sales"],["inventory","Inventory"]];
 document.getElementById("nav").innerHTML=tabs.map((t,i)=>`<button class="${i?'':'active'}" onclick="showTab('${t[0]}',this)">${t[1]}</button>`).join("");
 function showTab(id,b){document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));b.classList.add('active')}
 
 const blankItem=()=>({name:"",category:"",unitCost:"",qtyPerTicket:"",inventoryName:""});
 const blankPackage=()=>({name:"",eventbriteTicketClassId:"",price:"",manualSold:"",eventbriteSold:0,eventbriteRevenue:0,fees:0,items:[blankItem()]});
 const defaultState={
+ business:{name:"",owner:"",logo:"",address:"",city:"",state:"",zip:"",phone:"",email:"",website:"",instagram:"",facebook:"",taxRate:"",taxId:"",notes:""},
  event:{name:"",date:"",location:"",expectedGuests:"",sponsor:"",otherIncome:""},
  eventbrite:{eventId:"1995025559152",connectorUrl:"",lastSync:"",orders:[],ticketClasses:[]},
  packages:[blankPackage()],
@@ -101,7 +110,10 @@ const defaultState={
  inventory:[{name:"",starting:"",purchased:"",manualUsed:"",damaged:"",reorderLevel:""}]
 };
 let state;
-try{state=JSON.parse(localStorage.getItem("sipPaintPlannerV4"))||defaultState}catch(e){state=defaultState}
+try{
+ const saved=JSON.parse(localStorage.getItem("sipPaintPlannerV4"))||{};
+ state={...defaultState,...saved,business:{...defaultState.business,...(saved.business||{})},event:{...defaultState.event,...(saved.event||{})},eventbrite:{...defaultState.eventbrite,...(saved.eventbrite||{})}};
+}catch(e){state=structuredClone(defaultState)}
 function n(v){return Number(v)||0}
 const money=v=>new Intl.NumberFormat("en-US",{style:"currency",currency:"USD"}).format(n(v));
 const esc=v=>String(v??"").replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
@@ -114,9 +126,28 @@ function totalPackageCosts(){return state.packages.reduce((s,p)=>s+packageItemCo
 function totalPackageFees(){return state.packages.reduce((s,p)=>s+n(p.fees),0)}
 function saveState(silent=false){localStorage.setItem("sipPaintPlannerV4",JSON.stringify(state));if(!silent)alert("Saved on this device.")}
 function render(){
- renderEvent();renderPackages();renderVenue();renderSupplies();renderSales();renderInventory();renderEventbrite();renderKpis();
+ renderBusiness();renderEvent();renderPackages();renderVenue();renderSupplies();renderSales();renderInventory();renderEventbrite();renderKpis();
  document.getElementById("ebEventId").value=state.eventbrite.eventId||"";
  document.getElementById("ebConnectorUrl").value=state.eventbrite.connectorUrl||"";
+}
+function renderBusiness(){
+ const fields=[
+  ["name","Business Name","text","Enter business name"],
+  ["owner","Owner Name","text","Enter owner name"],
+  ["logo","Logo URL","url","Enter logo image URL"],
+  ["address","Street Address","text","Enter street address"],
+  ["city","City","text","Enter city"],
+  ["state","State","text","Enter state"],
+  ["zip","ZIP Code","text","Enter ZIP code"],
+  ["phone","Phone","tel","Enter phone number"],
+  ["email","Email","email","Enter email address"],
+  ["website","Website","url","Enter website address"],
+  ["instagram","Instagram","text","Enter Instagram profile"],
+  ["facebook","Facebook","text","Enter Facebook profile"],
+  ["taxRate","Tax Rate (%)","number","Enter tax percentage"],
+  ["taxId","Tax ID","text","Enter optional tax ID"]
+ ];
+ businessInputs.innerHTML=fields.map(([k,l,t,p])=>`<div><label>${l}</label><input type="${t}" placeholder="${p}" value="${esc(state.business[k])}" ${k==='taxRate'?'step="0.01"':''} oninput="state.business.${k}=this.value;saveState(true)"></div>`).join("")+`<div class="wide"><label>Business Notes</label><textarea placeholder="Enter business notes" oninput="state.business.notes=this.value;saveState(true)">${esc(state.business.notes)}</textarea></div>`;
 }
 function renderEvent(){
  const fields=[["name","Event Name","text"],["date","Event Date","date"],["location","Venue / Location","text"],["expectedGuests","Expected Guests","number"],["sponsor","Sponsorship Income","number"],["otherIncome","Other Income","number"]];
@@ -251,6 +282,7 @@ function renderKpis(){
 }
 function exportData(){saveState(true);const b=new Blob([JSON.stringify(state,null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="sip-paint-planner-backup.json";a.click();URL.revokeObjectURL(a.href)}
 function importData(e){const f=e.target.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{try{state=JSON.parse(rd.result);saveState(true);render()}catch(err){alert("That backup file is not valid.")}};rd.readAsText(f)}
+document.addEventListener("focusin",e=>{if(e.target.matches("input:not([type=checkbox]):not([type=file]),textarea"))e.target.select?.()});
 render();
 if("serviceWorker" in navigator)navigator.serviceWorker.register("service-worker.js").catch(()=>{});
 </script>

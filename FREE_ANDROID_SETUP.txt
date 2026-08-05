@@ -1,0 +1,28 @@
+FREE ANDROID VERSION — GITHUB PAGES
+
+This package can be hosted free using GitHub Pages.
+
+UPLOAD STEPS
+1. Create a free account at GitHub.
+2. Create a new public repository, for example: sip-paint-planner.
+3. Upload every file from this ZIP to the repository.
+4. Open the repository Settings.
+5. Select Pages.
+6. Under Build and deployment, choose:
+   Source: Deploy from a branch
+   Branch: main
+   Folder: /root
+7. Save.
+8. GitHub will provide a website address after publishing.
+
+INSTALL ON ANDROID
+1. Open the published GitHub Pages address in Google Chrome.
+2. Tap the three-dot browser menu.
+3. Choose Install app or Add to Home screen.
+4. Confirm installation.
+
+NOTES
+- Hosting through GitHub Pages is free for a public repository.
+- Information is saved locally on each device.
+- Use Export Backup in the app to keep a copy of your data.
+- The package is a Progressive Web App, not an APK from the Google Play Store.

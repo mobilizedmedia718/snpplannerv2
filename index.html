@@ -130,11 +130,22 @@ function render(){
  document.getElementById("ebEventId").value=state.eventbrite.eventId||"";
  document.getElementById("ebConnectorUrl").value=state.eventbrite.connectorUrl||"";
 }
+function handleLogoUpload(event){
+ const file=event.target.files&&event.target.files[0];
+ if(!file)return;
+ if(!file.type.startsWith("image/")){alert("Please select an image file.");event.target.value="";return}
+ if(file.size>1500000){alert("Please choose an image smaller than 1.5 MB.");event.target.value="";return}
+ const reader=new FileReader();
+ reader.onload=()=>{state.business.logo=reader.result;saveState(true);renderBusiness()};
+ reader.onerror=()=>alert("The image could not be loaded.");
+ reader.readAsDataURL(file);
+}
+function updateBusinessLogoUrl(value){state.business.logo=value;saveState(true);const preview=document.getElementById("businessLogoPreview");const area=document.getElementById("businessLogoPreviewArea");if(preview&&area){preview.src=value;area.style.display=value?"block":"none"}}
+function removeBusinessLogo(){state.business.logo="";saveState(true);renderBusiness()}
 function renderBusiness(){
  const fields=[
   ["name","Business Name","text","Enter business name"],
   ["owner","Owner Name","text","Enter owner name"],
-  ["logo","Logo URL","url","Enter logo image URL"],
   ["address","Street Address","text","Enter street address"],
   ["city","City","text","Enter city"],
   ["state","State","text","Enter state"],
@@ -147,7 +158,9 @@ function renderBusiness(){
   ["taxRate","Tax Rate (%)","number","Enter tax percentage"],
   ["taxId","Tax ID","text","Enter optional tax ID"]
  ];
- businessInputs.innerHTML=fields.map(([k,l,t,p])=>`<div><label>${l}</label><input type="${t}" placeholder="${p}" value="${esc(state.business[k])}" ${k==='taxRate'?'step="0.01"':''} oninput="state.business.${k}=this.value;saveState(true)"></div>`).join("")+`<div class="wide"><label>Business Notes</label><textarea placeholder="Enter business notes" oninput="state.business.notes=this.value;saveState(true)">${esc(state.business.notes)}</textarea></div>`;
+ const logo=state.business.logo||"";
+ const logoUrl=logo.startsWith("data:")?"":logo;
+ businessInputs.innerHTML=`<div class="wide"><label>Business Logo</label><input type="url" placeholder="Paste an image URL or upload a file below" value="${esc(logoUrl)}" onfocus="this.select()" oninput="updateBusinessLogoUrl(this.value)"><input type="file" accept="image/*" onchange="handleLogoUpload(event)"><div id="businessLogoPreviewArea" style="margin-top:12px;display:${logo?'block':'none'}"><img id="businessLogoPreview" src="${esc(logo)}" alt="Business logo preview" style="display:block;max-width:220px;max-height:160px;object-fit:contain;border:1px solid #ddd;border-radius:8px;padding:8px;background:#fff"><button type="button" class="btn danger" style="margin-top:8px" onclick="removeBusinessLogo()">Remove Logo</button></div></div>`+fields.map(([k,l,t,p])=>`<div><label>${l}</label><input type="${t}" placeholder="${p}" value="${esc(state.business[k])}" ${k==="taxRate"?'step="0.01"':""} onfocus="this.select()" oninput="state.business.${k}=this.value;saveState(true)"></div>`).join("")+`<div class="wide"><label>Business Notes</label><textarea placeholder="Enter business notes" onfocus="this.select()" oninput="state.business.notes=this.value;saveState(true)">${esc(state.business.notes)}</textarea></div>`;
 }
 function renderEvent(){
  const fields=[["name","Event Name","text"],["date","Event Date","date"],["location","Venue / Location","text"],["expectedGuests","Expected Guests","number"],["sponsor","Sponsorship Income","number"],["otherIncome","Other Income","number"]];
